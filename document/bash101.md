@@ -56,6 +56,79 @@ cd ..
 cd ../..
 ```
 
+### **File Tree | `find`**
+
+You can use find to find things or view a file tree.It lists every folder and files recursively.
+
+```bash
+find
+
+# You can use find <folder_name> to display the tree of a different folder.
+
+find different_directory/
+find client/
+```
+
+**Filters `-type`**
+
+Here, the filter is -type. You guessed it, -type f selects files, and -type d selects directories.
+
+```bash
+# Select Files
+find -type f
+
+# Select Directory
+find -type d
+```
+
+**Filters `-name`**
+
+There's a -name flag in there. You can use it to search for something with find `-name <filename>`
+
+```bash
+# find -name file
+find -name filename.extension
+find -name index.js
+
+# case insensitive
+find -iname index.js
+
+find components/ -name Button.js
+
+# Pattern | regular expression
+find -name "*.js"
+find -iname "*.Md"
+```
+
+**Combining Filters [`-and`,`-or`,`-not`, regular expression]**
+
+```bash
+find -name "*.js" -type f
+
+# -or
+find -name "*.js" -or -name "file3.md" -type f
+
+# -and
+find -name "*.js" -or -name "*.css" -and -type f
+
+# -not
+find -not -name "*.js" -type f
+
+# regular extension
+find \( -name "*.js" -type f \) -or -type d
+# note: you have to escape the brackets.
+```
+
+**Actions [`-delete`, `-exec`, `-print`]**
+
+```bash
+# -delete
+find -name "*.c" -type f -delete
+
+# -print
+find -type f -print
+```
+
 ## 📐 MODIFYING DIRECTORY AND FILES
 
 ### **Directory**
@@ -78,28 +151,6 @@ rmdir client
 # That will remove the folder and everything in it.
 rm -r directory_name/
 rmdir client/
-```
-
-### **File tree**
-
-You can use find to find things or view a file tree.
-
-```bash
-find
-
-# You can use find <folder_name> to display the tree of a different folder.
-
-find different_directory/
-find client/
-```
-
-There's a -name flag in there. You can use it to search for something with find `-name <filename>`
-
-```bash
-# find -name file
-find -name index.js
-
-find components/ -name Button.js
 ```
 
 ### **Files**
