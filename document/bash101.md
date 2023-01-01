@@ -23,17 +23,51 @@ ls
 That's a lot of folders. You can add a flag to a command to use it different ways like this: `ls <flag>`.
 
 ```bash
+ls --help
 
+#  Display a long list of files, showing additional information such as permissions, owner, and file size.
 ls -l
 
-# ls --help
+ls -l --block-size=M
 
-# -a, --all
+ls *.exe -1 -alShr
+
+# Display file sizes in "human-readable" format
+ls -lh
+
+# Show the long file information, but omit the group name.
+ls -o
+
+# Show hidden files in the list.
+-a, --all
+
+# This command shows a long list of files, including hidden files, and uses human-readable file sizes
+ls -alh
+
+# Show both hidden files and the long file information.
+ls  -la
+
+# Show all files with specific name or extension
+ls *.txt
+ls *css*
+
+# Sort the list by file size.
+ls -S
+
+# Sort the list by modification time.
+ls -t
+
+# Reverse the order of the list.
+ls -r
+
 # -d, --directory
-# -r, --reverse
 # -R, --recursive
-# -s, --size
+
 # -S --sort=WORD [none, size, time, version. extension]
+ls --sort=size
+ls --sort=time
+ls --sort=extension
+
 # -t list entries in directory order
 # -U
 # -v
