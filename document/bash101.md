@@ -67,6 +67,7 @@ find
 
 find different_directory/
 find client/
+find directory1 directory2 directory3 directory4
 ```
 
 **Filters `-type`**
@@ -105,13 +106,13 @@ find -iname "*.Md"
 ```bash
 find -name "*.js" -type f
 
-# -or
+# -or | -o
 find -name "*.js" -or -name "file3.md" -type f
 
-# -and
+# -and | -a
 find -name "*.js" -or -name "*.css" -and -type f
 
-# -not
+# -not | !
 find -not -name "*.js" -type f
 
 # regular extension
@@ -127,6 +128,48 @@ find -name "*.c" -type f -delete
 
 # -print
 find -type f -print
+
+# Find all file and remove from hdd
+find . -type f -iname "*txt" -exec rm {} \;
+
+# Find all file and move to other folder
+find . -type f -exec mv {} folder_dir \;
+
+# Find all file and copy to other folder
+find . -type f -exec cp {} folder_dir \;
+
+# Find a file that contains a string of 'Some String'.
+find . type f -exec grep 'Some String' {} \;
+# Show only file name
+find . -type f -exec grep 'music' -il {} \;
+
+```
+
+**More Example with Time [`mtime`, `newer`, `size`]**
+
+```bash
+# Any file created within 24 hours
+find . -type f -mtime -1
+
+# Any file before last 24 horus
+find . -type f -mtime +1
+
+find . -type f -mtime +1  -a -mtime -10
+
+# All the file is newer than a specific file
+find . -type f -newer file.js
+
+# Any file that bigger than / smaller size
+find . -type f -size -1M
+find . -type f -size +1M
+```
+
+**Pipe `find` command with `ls` or `wc` command**
+
+```bash
+find . -type f | ls -l
+
+find . -type f | wc -l
 ```
 
 ## 📐 MODIFYING DIRECTORY AND FILES
