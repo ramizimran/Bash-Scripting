@@ -23,17 +23,51 @@ ls
 That's a lot of folders. You can add a flag to a command to use it different ways like this: `ls <flag>`.
 
 ```bash
+ls --help
 
+#  Display a long list of files, showing additional information such as permissions, owner, and file size.
 ls -l
 
-# ls --help
+ls -l --block-size=M
 
-# -a, --all
+ls *.exe -1 -alShr
+
+# Display file sizes in "human-readable" format
+ls -lh
+
+# Show the long file information, but omit the group name.
+ls -o
+
+# Show hidden files in the list.
+-a, --all
+
+# This command shows a long list of files, including hidden files, and uses human-readable file sizes
+ls -alh
+
+# Show both hidden files and the long file information.
+ls  -la
+
+# Show all files with specific name or extension
+ls *.txt
+ls *css*
+
+# Sort the list by file size.
+ls -S
+
+# Sort the list by modification time.
+ls -t
+
+# Reverse the order of the list.
+ls -r
+
 # -d, --directory
-# -r, --reverse
 # -R, --recursive
-# -s, --size
+
 # -S --sort=WORD [none, size, time, version. extension]
+ls --sort=size
+ls --sort=time
+ls --sort=extension
+
 # -t list entries in directory order
 # -U
 # -v
@@ -67,6 +101,7 @@ find
 
 find different_directory/
 find client/
+find directory1 directory2 directory3 directory4
 ```
 
 **Filters `-type`**
@@ -105,13 +140,13 @@ find -iname "*.Md"
 ```bash
 find -name "*.js" -type f
 
-# -or
+# -or | -o
 find -name "*.js" -or -name "file3.md" -type f
 
-# -and
+# -and | -a
 find -name "*.js" -or -name "*.css" -and -type f
 
-# -not
+# -not | !
 find -not -name "*.js" -type f
 
 # regular extension
@@ -127,6 +162,48 @@ find -name "*.c" -type f -delete
 
 # -print
 find -type f -print
+
+# Find all file and remove from hdd
+find . -type f -iname "*txt" -exec rm {} \;
+
+# Find all file and move to other folder
+find . -type f -exec mv {} folder_dir \;
+
+# Find all file and copy to other folder
+find . -type f -exec cp {} folder_dir \;
+
+# Find a file that contains a string of 'Some String'.
+find . type f -exec grep 'Some String' {} \;
+# Show only file name
+find . -type f -exec grep 'music' -il {} \;
+
+```
+
+**More Example with Time [`mtime`, `newer`, `size`]**
+
+```bash
+# Any file created within 24 hours
+find . -type f -mtime -1
+
+# Any file before last 24 horus
+find . -type f -mtime +1
+
+find . -type f -mtime +1  -a -mtime -10
+
+# All the file is newer than a specific file
+find . -type f -newer file.js
+
+# Any file that bigger than / smaller size
+find . -type f -size -1M
+find . -type f -size +1M
+```
+
+**Pipe `find` command with `ls` or `wc` command**
+
+```bash
+find . -type f | ls -l
+
+find . -type f | wc -l
 ```
 
 ## 📐 MODIFYING DIRECTORY AND FILES
